@@ -1,7 +1,7 @@
 const cityInput = document.querySelector("#city-input");
 const searchBtn = document.querySelector("#search-btn");
 
-const notFoundSection = document.querySelector('.not-found');
+const notFoundSection = document.querySelector(".not-found");
 const weatherInfoSection = document.querySelector(".weather-info");
 const searchCitySection = document.querySelector(".search-city");
 
@@ -37,42 +37,57 @@ async function getFetchData(endPoint, city) {
   return response.json();
 }
 
-function getWeatherImg(id){
-  let img = '';
-  if(id <= 232){
-    img = ""
+function getWeatherImg(id) {
+  let img = "";
+  if (id <= 232) {
+    img = "1146860.png";
+  } else if (id <= 321) {
+    img = "9342323.png";
+  } else if (id <= 531) {
+    img = "rain.svg";
+  } else if (id <= 622) {
+    img = "2361273671641457984-64.png";
+  } else if (id <= 781) {
+    img = "10425773121600621643-64.png";
+  } else if (id == 800) {
+    img = "115492004716268572233431-64.png";
+  } else if (id <= 804) {
+    img = "clouds.svg";
   }
+
+  return img;
 }
 
 async function updateWeatherInfo(city) {
   const weatherData = await getFetchData("weather", city);
 
-  if(weatherData.cod != 200){
+  if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
-    return
+    return;
   }
   showDisplaySection(weatherInfoSection);
 
   const {
-    name : country,
-    main: {temp, humidity},
-    weather: [{id, main}],
-    wind: {speed}
+    name: country,
+    main: { temp, humidity },
+    weather: [{ id, main }],
+    wind: { speed },
   } = weatherData;
 
   countryName.textContent = country;
   countryTempText.textContent = Math.round(temp) + " °C";
   conditionText.textContent = main;
-  humidityValue.textContent = humidity + ' %';
-  windValue.textContent = speed + ' M/s';
+  humidityValue.textContent = humidity + " %";
+  windValue.textContent = speed + " M/s";
 
   weatherSummaryImg.src = `/Weather_App/Assets/${getWeatherImg(id)}`;
 
   console.log(weatherData);
 }
 
-function showDisplaySection(section){
-  [weatherInfoSection, notFoundSection, searchCitySection]
-  .forEach((sec)=>sec.style.display = 'none');
-  section.style.display = 'flex';
+function showDisplaySection(section) {
+  [weatherInfoSection, notFoundSection, searchCitySection].forEach(
+    (sec) => (sec.style.display = "none")
+  );
+  section.style.display = "flex";
 }
