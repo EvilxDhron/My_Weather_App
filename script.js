@@ -7,6 +7,7 @@ const searchCitySection = document.querySelector(".search-city");
 
 const countryName = document.querySelector(".country-text");
 const currentDate = document.querySelector(".current-date-text");
+const apiKey = "bbe61a4c8d7f44c73200b9df8f3d1755";
 const weatherSummaryImg = document.querySelector(".weather-summary-img");
 const countryTempText = document.querySelector(".temp-text");
 const conditionText = document.querySelector(".condition-text");
@@ -17,11 +18,9 @@ const forecastItemscontainer = document.querySelector(
   ".forecast-items-container"
 );
 
-const apiKey = "bbe61a4c8d7f44c73200b9df8f3d1755";
-
 searchBtn.addEventListener("click", () => {
   if (cityInput.value.trim() != "") {
-    console.log(cityInput.value);
+    // console.log(cityInput.value);
     updateWeatherInfo(cityInput.value);
     cityInput.value = "";
   }
@@ -29,7 +28,7 @@ searchBtn.addEventListener("click", () => {
 
 cityInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && cityInput.value.trim() != "") {
-    console.log(cityInput.value);
+    // console.log(cityInput.value);
     updateWeatherInfo(cityInput.value);
     cityInput.value = "";
   }
@@ -99,7 +98,7 @@ async function updateWeatherInfo(city) {
   currentDate.textContent = getCurrentDate();
 
   await updateForecastInfo(city);
-  console.log(weatherData);
+  // console.log(weatherData);
 }
 
 async function updateForecastInfo(city) {
@@ -118,11 +117,11 @@ async function updateForecastInfo(city) {
       updateForecastItems(forecastWeather);
     }
   });
-  console.log(todayDate);
+  // console.log(todayDate);
 }
 
 function updateForecastItems(weatherData) {
-  console.log(weatherData);
+  // console.log(weatherData);
 
   const {
     dt_txt: date,
@@ -130,7 +129,7 @@ function updateForecastItems(weatherData) {
     main: { temp },
   } = weatherData;
 
-  console.log(new Date(date));
+  // console.log(new Date(date));
   const dateTaken = new Date(date);
   const dateOptions = {
     day: '2-digit',
